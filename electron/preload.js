@@ -2,6 +2,7 @@ const { contextBridge, ipcRenderer } = require("electron");
 
 contextBridge.exposeInMainWorld("electronAPI", {
   // updater
+  checkForUpdates: () => ipcRenderer.invoke("check-for-updates"),
   onUpdateAvailable: (cb) =>
     ipcRenderer.on("update-available", (_, version) => cb(version)),
   onUpdateNotAvailable: (cb) =>

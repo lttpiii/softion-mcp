@@ -33,9 +33,16 @@ function Dashboard(root, ctx = {}) {
   };
 
   root.querySelector("#settings-btn").onclick = () => ctx.onSettings?.();
-  root.querySelector("#check-update-btn").onclick = () => {
+  root.querySelector("#check-update-btn").onclick = async () => {
     statusEl.textContent = "🔍 Mengecek update...";
-    window.location.reload();
+    const latest = await window.electronAPI.checkForUpdates();
+
+    if (latest) {
+      document.getElementById("latest-version").textContent = "v" + latest;
+    } else {
+      document.getElementById("latest-version").textContent =
+        "Gagal cek update";
+    }
   };
 
   // Updater events

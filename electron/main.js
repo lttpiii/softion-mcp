@@ -61,3 +61,12 @@ app.on("window-all-closed", () => {
 ipcMain.handle("get-app-version", () => {
   return app.getVersion(); // ini ambil dari package.json > version
 });
+
+ipcMain.handle("check-for-updates", async () => {
+  try {
+    const result = await autoUpdater.checkForUpdates();
+    return result?.updateInfo?.version || null;
+  } catch (err) {
+    return null;
+  }
+});
