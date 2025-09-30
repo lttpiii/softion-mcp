@@ -19,7 +19,9 @@ function createWindow() {
   win.loadFile(path.join(__dirname, "..", "renderer", "index.html"));
 
   // inisialisasi updater
-  updater.initUpdater(win);
+  win.once("ready-to-show", () => {
+    updater.initUpdater(win);
+  });
 }
 
 // IPC handler
@@ -62,8 +64,4 @@ ipcMain.handle("get-app-version", () => {
 
 autoUpdater.on("update-available", (info) => {
   createWindow.webContents.send("update-available", info.version);
-});
-
-autoUpdater.on("update-not-available", (info) => {
-  createWindow.webContents.send("update-not-available", info.version);
 });

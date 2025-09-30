@@ -2,11 +2,15 @@ const { autoUpdater } = require("electron-updater");
 
 function initUpdater(win) {
   autoUpdater.on("update-available", () => {
-    win.webContents.send("update-available");
+    safeSend(win, "update-available");
+  });
+
+  autoUpdater.on("error", (err) => {
+    safeSend(win, "update-error", err.message);
   });
 
   autoUpdater.on("update-not-available", () => {
-    win.webContents.send("update-not-available");
+    safeSend(win, "update-available");
   });
 
   autoUpdater.on("update-downloaded", () => {
@@ -14,7 +18,7 @@ function initUpdater(win) {
   });
 
   autoUpdater.on("error", (err) => {
-    win.webContents.send("update-error", err.message);
+    safeSend(win, "update-error", err.message);
   });
 
   // cek update otomatis tiap app start (safe to call)
@@ -26,6 +30,14 @@ function initUpdater(win) {
 
 function quitAndInstall() {
   autoUpdater.quitAndInstall();
+}
+
+function safeSend(win, channel, ...args) {
+  if (win && !win.isDestroyed()) {
+    win.webContents.send(channel, ...args);
+  } else {
+    console.warn(`⚠️ Skip send to ${channel}, window not ready`);
+  }
 }
 
 module.exports = { initUpdater, quitAndInstall };
