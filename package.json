@@ -1,0 +1,55 @@
+{
+  "name": "softion-mcp",
+  "version": "1.0.0",
+  "description": "MCP Installer & Updater",
+  "main": "electron/main.js",
+  "scripts": {
+    "dev": "electron .",
+    "start": "electron .",
+    "build": "electron-builder --publish never"
+  },
+  "keywords": [],
+  "author": {
+    "name": "Luthfi Indrawan",
+    "email": "luthfiindrawan78@gmail.com"
+  },
+  "license": "MIT",
+  "type": "commonjs",
+  "dependencies": {
+    "dotenv": "^17.2.2",
+    "electron-updater": "^6.6.2"
+  },
+  "devDependencies": {
+    "electron": "^38.1.2",
+    "electron-builder": "^26.0.12"
+  },
+  "build": {
+    "appId": "com.softion.mcp",
+    "files": [
+      "**/*"
+    ],
+    "directories": {
+      "output": "dist"
+    },
+    "win": {
+      "target": "nsis"
+    },
+    "mac": {
+      "target": "dmg"
+    },
+    "linux": {
+      "target": [
+        "AppImage",
+        "deb"
+      ]
+    },
+    "publish": [
+      {
+        "provider": "github",
+        "owner": "lttpiii",
+        "repo": "softion-mcp",
+        "releaseType": "release"
+      }
+    ]
+  }
+}
