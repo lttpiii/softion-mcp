@@ -61,9 +61,9 @@ ipcMain.handle("get-app-version", () => {
 });
 
 autoUpdater.on("update-available", (info) => {
-  mainWindow.webContents.send("update-available", info.version);
+  createWindow.webContents.send("update-available", info.version);
 });
 
 autoUpdater.on("update-not-available", (info) => {
-  mainWindow.webContents.send("update-not-available", info.version);
+  createWindow.webContents.send("update-not-available", info.version);
 });
