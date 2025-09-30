@@ -1,6 +1,6 @@
 {
   "name": "softion-mcp",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "MCP Installer & Updater",
   "main": "electron/main.js",
   "scripts": {
