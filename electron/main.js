@@ -61,7 +61,3 @@ app.on("window-all-closed", () => {
 ipcMain.handle("get-app-version", () => {
   return app.getVersion(); // ini ambil dari package.json > version
 });
-
-autoUpdater.on("update-available", (info) => {
-  createWindow.webContents.send("update-available", info.version);
-});

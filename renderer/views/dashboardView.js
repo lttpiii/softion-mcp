@@ -65,8 +65,7 @@ function Dashboard(root, ctx = {}) {
 
 // latest version listener
 window.electronAPI.onUpdateAvailable((latest) => {
-  document.getElementById("latest-version").textContent =
-    "v" + (latest.version || latest);
+  document.getElementById("latest-version").textContent = "v" + latest;
 });
 window.electronAPI.onUpdateNotAvailable((current) => {
   document.getElementById("latest-version").textContent = "v" + current;
